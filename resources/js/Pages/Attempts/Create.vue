@@ -1,5 +1,5 @@
 <template>
-  <guest-layout>
+  <survey-layout>
     <Head title="Ankieta" />
     <form-wizard
       v-if="!completed"
@@ -66,13 +66,13 @@
         <span class="error">{{ errorMsg }}</span>
       </div>
     </form-wizard>
-  </guest-layout>
+  </survey-layout>
 </template>
 
 <script>
-  import { Inertia } from '@inertiajs/inertia';
+
   import { FormWizard, TabContent } from "vue3-form-wizard";
-  import GuestLayout from '@/Layouts/GuestLayout.vue';
+  import SurveyLayout from '@/Layouts/SurveyLayout.vue';
   import { Head } from '@inertiajs/vue3'
   import { NInput, NSelect, NSpace, NRate, NDivider } from 'naive-ui';
   import "vue3-form-wizard/dist/style.css";
@@ -80,7 +80,7 @@
   export default {
     name: "AttemptCreate",
     components: {
-      GuestLayout, Head, FormWizard, TabContent, NInput, NSelect, NSpace, NRate, NDivider
+      SurveyLayout, Head, FormWizard, TabContent, NInput, NSelect, NSpace, NRate, NDivider
     },
     props: {
       attempt: {
@@ -113,17 +113,15 @@
       onComplete() {
         this.completed = true;
       },
-      saveStep(step) {
+      async saveStep(step) {
         this.filled.step = step;
 
-        Inertia.post('/progress/store', this.filled, {
-          onSuccess: (response) => {
-            console.log('Success:', response);
-          },
-          onError: (errors) => {
-            console.error('Error:', errors);
-          }
-        });
+        try {
+          await axios.post('/progress/store', this.filled);
+        } catch (error) {
+          this.errorMsg = error.response?.data?.message || 'An error occurred.';
+          console.error('Error:', error);
+        }
       },
       handleErrorMessage(err) {
         this.errorMsg = err;
