@@ -2,22 +2,23 @@
 
 namespace Database\Factories;
 
+use App\Models\Question;
+use App\Models\Survey;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Question>
+ * @extends Factory
  */
 class QuestionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Question::class;
+
     public function definition(): array
     {
         return [
-            //
+            'survey_id' => Survey::factory(),
+            'question_text' => $this->faker->sentence,
+            'question_type' => $this->faker->randomElement(['textarea', 'select', 'rating']),
         ];
     }
 }
