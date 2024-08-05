@@ -1,5 +1,5 @@
 <template>
-  <guest-layout>
+  <survey-layout>
       <Head title="Lista Ankiet" />
       <div class="bg-white rounded-md shadow overflow-x-auto">
         <h1 class="pb-4 pt-6 px-6 font-bold uppercase">Uzupełnione Ankiety</h1>
@@ -40,18 +40,18 @@
         </table>
       </div>
       <pagination class="mt-6" :links="attempts.links" />
-  </guest-layout>
+  </survey-layout>
 </template>
 
 <script>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import SurveyLayout from '@/Layouts/SurveyLayout.vue';
 import Pagination from '@/Components/Pagination.vue'
 import { Head } from '@inertiajs/vue3';
 
 export default {
   name: "AttemptsIndex",
   components: {
-      GuestLayout,
+      SurveyLayout,
       Pagination,
       Head
   },
