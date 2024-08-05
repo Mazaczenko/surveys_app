@@ -66,6 +66,14 @@
         <span class="error">{{ errorMsg }}</span>
       </div>
     </form-wizard>
+    <template v-else>
+      <div class="heart-div">
+        <div class="heart">
+          <div class="heartbeat">❤️</div>
+          <div class="heartecho">❤️</div>
+        </div>
+      </div>
+    </template>
   </survey-layout>
 </template>
 
@@ -174,6 +182,7 @@
 
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css");
+
 span.error {
   color: #e74c3c;
   font-size: 20px;
@@ -182,27 +191,91 @@ span.error {
 }
 
 .rating-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .rating-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 1rem;
 }
 
 .option-label {
-    text-align: left;
+  text-align: left;
 }
 
 .n-rate {
-    text-align: right;
+  text-align: right;
+}
+
+.heart-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh; /* Full viewport height */
+}
+
+.heart {
+  font-size: 6em;
+  position: relative;
+}
+
+.heartbeat {
+  position: relative;
+  z-index: 1;
+  animation: beat 2s linear infinite;
+}
+
+.heartecho {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: echo 2s linear infinite;
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(0.9);
+  }
+  21% {
+    transform: scale(1.1) skew(0.004turn);
+  }
+  28% {
+    transform: scale(1) skew(0.008turn);
+  }
+  35% {
+    transform: scale(1) skew(0);
+  }
+}
+
+@keyframes echo {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  14% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  21% {
+    opacity: 0.4;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
 }
 </style>
