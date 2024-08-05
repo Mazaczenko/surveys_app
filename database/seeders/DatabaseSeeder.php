@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        $this->call(SurveyAnswersSeeder::class);
         $this->call(SurveyWithQuestionsSeeder::class);
+        $this->call(SurveyAnswersSeeder::class);
     }
 }
