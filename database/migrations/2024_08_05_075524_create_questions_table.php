@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('survey_id')->constrained()->onDelete('cascade');
+            $table->text('value');
+            $table->enum('type', ['textarea', 'select', 'rating']);
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('attempts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('survey_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_completed')->default(false); // To track if the attempt is completed
             $table->timestamps();
         });
     }

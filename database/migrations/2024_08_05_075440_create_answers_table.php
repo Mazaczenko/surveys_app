@@ -9,18 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('attempt_id')->constrained()->onDelete('cascade');
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->text('text')->nullable();  // For textarea input
+            $table->integer('numeric')->nullable(); // For numeric input like ratings
+            $table->foreignId('option_id')->nullable()->constrained('options')->onDelete('cascade'); // For select input
+            $table->enum('type', ['text', 'numeric', 'option']); // To define the type of the answer, should be foreign here, but it's a simple form
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('answers');
     }
